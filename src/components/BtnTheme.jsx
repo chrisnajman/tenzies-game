@@ -3,7 +3,7 @@ import { useState, useEffect } from "react"
 function BtnTheme() {
   function getStoredTheme() {
     try {
-      const storedTheme = localStorage.getItem("theme")
+      const storedTheme = localStorage.getItem("theme-tenzies")
       return storedTheme ? JSON.parse(storedTheme) : false
     } catch (error) {
       console.error("Error parsing theme from localStorage:", error)
@@ -15,7 +15,7 @@ function BtnTheme() {
 
   useEffect(() => {
     document.documentElement.classList.toggle("lightmode", theme)
-    localStorage.setItem("theme", theme)
+    localStorage.setItem("theme-tenzies", theme)
   }, [theme])
 
   function handleMode() {
