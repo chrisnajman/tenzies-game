@@ -196,6 +196,7 @@ button {
   flex-direction: column;
   gap: 5rem;
   box-shadow: var(--shadow);
+  border: 1rem solid #59e391;
 
   & * {
     margin-inline: auto;
@@ -209,7 +210,7 @@ button {
   & .game--grid {
     display: grid;
 
-    @media screen and (width < 480px) {
+    @media screen and (width < 520px) {
       grid-template-columns: repeat(2, 1fr);
       grid-template-rows: repeat(5, 1fr);
     }
@@ -223,6 +224,11 @@ button {
       display: flex;
       align-items: center;
       justify-content: center;
+      @media (hover: hover) {
+        &:hover {
+          opacity: 1;
+        }
+      }
 
       & svg {
         border-radius: 1.3rem;
@@ -239,6 +245,13 @@ button {
         &.selected {
           fill: var(--selected);
           background-color: black;
+
+          @media (hover: hover) {
+            &:hover {
+              fill: var(--fg);
+              background-color: var(--bg);
+            }
+          }
         }
       }
     }
@@ -246,7 +259,8 @@ button {
 
   & .game--footer {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    gap: 3rem;
 
     & button {
       background-color: #405cf5;
@@ -256,6 +270,22 @@ button {
       font-size: 2rem;
       border-radius: 0.5rem;
       box-shadow: var(--shadow);
+    }
+
+    p {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      font-weight: 600;
+
+      & span {
+        &:last-child {
+          background-color: var(--fg);
+          color: var(--bg);
+          padding-inline: 0.75rem;
+          border-radius: 0.3rem;
+        }
+      }
     }
   }
 }

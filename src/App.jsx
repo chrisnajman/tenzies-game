@@ -8,12 +8,20 @@ function App() {
   const [dice, setDice] = useState(tenRandomNumbers())
   const [gameStatus, setGameStatus] = useState(false)
 
+  const initNumRolls = 0
+  const [numRolls, setNumRolls] = useState(initNumRolls)
+
   useEffect(() => {
     const allDiceHeld = dice.every((die) => die.isHeld)
     const firstDie = dice[0]
     const sameValues = dice.every((die) => firstDie.value === die.value)
     if (allDiceHeld && sameValues) {
       setGameStatus(true)
+    }
+    if (allDiceHeld && !sameValues) {
+      alert(
+        "The dice values aren't the same! Unfreeze some to continue the game."
+      )
     }
   }, [dice])
 
@@ -28,9 +36,11 @@ function App() {
           return die.isHeld ? die : createNewDice()
         })
       )
+      setNumRolls((prevNumRolls) => prevNumRolls + 1)
     } else {
       setGameStatus(false)
       setDice(tenRandomNumbers())
+      setNumRolls(initNumRolls)
     }
   }
 
@@ -80,6 +90,9 @@ function App() {
             >
               {gameStatus ? "New game" : "Roll"}
             </button>
+            <p>
+              <span>Number of rolls:</span> <span>{numRolls}</span>
+            </p>
           </footer>
         </div>
       </Layout>

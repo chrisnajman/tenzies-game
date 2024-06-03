@@ -14,6 +14,12 @@ Interactive dice game, built followng the Scrimba React Tutorial [Tenzies Game (
 
 ---
 
+## Enhancements
+
+- Numbers replaced by dice `svgs`.
+- Number of rolls printed below 'Roll" button.
+- Warning (`alert()`) if all dice selected but dice values not the same.
+
 ## Accessibility
 
 - Fully keyboard navigable.
