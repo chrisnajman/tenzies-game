@@ -224,34 +224,15 @@ button {
       display: flex;
       align-items: center;
       justify-content: center;
-      @media (hover: hover) {
-        &:hover {
-          opacity: 1;
-        }
-      }
 
       & svg {
         border-radius: 1.3rem;
         box-shadow: var(--shadow);
         fill: var(--fg);
 
-        @media (hover: hover) {
-          &:hover {
-            fill: var(--selected);
-            background-color: black;
-          }
-        }
-
         &.selected {
           fill: var(--selected);
           background-color: black;
-
-          @media (hover: hover) {
-            &:hover {
-              fill: var(--fg);
-              background-color: var(--bg);
-            }
-          }
         }
       }
     }
@@ -284,7 +265,27 @@ button {
           color: var(--bg);
           padding-inline: 0.75rem;
           border-radius: 0.3rem;
+          min-width: 3ch;
+          text-align: center;
         }
+      }
+    }
+
+    & table {
+      font-size: 1.8rem;
+      border-spacing: 0;
+      border-collapse: collapse;
+      border: 0.2rem solid var(--fg);
+      color: var(--fg);
+      & th,
+      & td {
+        padding: 1rem;
+        font-weight: 600;
+      }
+
+      & td {
+        min-width: 3ch;
+        text-align: center;
       }
     }
   }

@@ -7,23 +7,32 @@ import Confetti from "react-confetti"
 function App() {
   const [dice, setDice] = useState(tenRandomNumbers())
   const [gameStatus, setGameStatus] = useState(false)
-
-  const initNumRolls = 0
-  const [numRolls, setNumRolls] = useState(initNumRolls)
+  const [numRolls, setNumRolls] = useState(0)
+  const [lowestNumRolls, setLowestNumRolls] = useState(
+    () => JSON.parse(localStorage.getItem("tenzies-game-rolls")) || []
+  )
 
   useEffect(() => {
     const allDiceHeld = dice.every((die) => die.isHeld)
     const firstDie = dice[0]
     const sameValues = dice.every((die) => firstDie.value === die.value)
-    if (allDiceHeld && sameValues) {
+
+    if (allDiceHeld && sameValues && !gameStatus) {
       setGameStatus(true)
+      const newLowestNumRolls = [...lowestNumRolls, numRolls]
+      setLowestNumRolls(newLowestNumRolls)
+      localStorage.setItem(
+        "tenzies-game-rolls",
+        JSON.stringify(newLowestNumRolls)
+      )
     }
-    if (allDiceHeld && !sameValues) {
+
+    if (allDiceHeld && !sameValues && !gameStatus) {
       alert(
         "The dice values aren't the same! Unfreeze some to continue the game."
       )
     }
-  }, [dice])
+  }, [dice, gameStatus, lowestNumRolls, numRolls])
 
   function createNewDice() {
     return { value: Math.ceil(Math.random() * 6), isHeld: false, id: nanoid() }
@@ -40,7 +49,7 @@ function App() {
     } else {
       setGameStatus(false)
       setDice(tenRandomNumbers())
-      setNumRolls(initNumRolls)
+      setNumRolls(0)
     }
   }
 
@@ -93,6 +102,32 @@ function App() {
             <p>
               <span>Number of rolls:</span> <span>{numRolls}</span>
             </p>
+            <table>
+              <tbody>
+                <tr>
+                  <th scope="row">No. Games Played</th>
+                  <td>
+                    {lowestNumRolls.length > 0 ? lowestNumRolls.length : 0}
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">Best (lowest) score</th>
+                  <td>
+                    {lowestNumRolls.length > 1
+                      ? Math.min(...lowestNumRolls)
+                      : "n/a"}
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">Worst (highest) score</th>
+                  <td>
+                    {lowestNumRolls.length > 1
+                      ? Math.max(...lowestNumRolls)
+                      : "n/a"}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </footer>
         </div>
       </Layout>

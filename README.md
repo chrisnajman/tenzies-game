@@ -18,6 +18,9 @@ Interactive dice game, built followng the Scrimba React Tutorial [Tenzies Game (
 
 - Numbers replaced by dice `svgs`.
 - Number of rolls printed below 'Roll" button.
+- Number of games printed to table.
+- Best (lowest) score printed to table.
+- Worst (highest) score printed to table.
 - Warning (`alert()`) if all dice selected but dice values not the same.
 
 ## Accessibility
